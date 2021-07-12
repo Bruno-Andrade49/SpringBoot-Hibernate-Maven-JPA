@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Repository;
@@ -27,7 +30,10 @@ public class Categoria implements Serializable {
 	public Categoria() {
 	}
 	
-	@Transient
+	@ManyToMany
+	@JoinTable(name = "Produtos_Categoria",
+	joinColumns = @JoinColumn(name = "categoria_id"),
+	inverseJoinColumns = @JoinColumn(name = "produto_id"))
 	public Set<Produto> produtos = new HashSet<>();
 
 	public Categoria(Integer id, String name) {

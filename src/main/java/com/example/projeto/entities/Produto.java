@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,7 @@ public class Produto implements Serializable {
 
 	private Categoria categoria;
 
-	@Transient
+	@ManyToMany(mappedBy = "produtos")
 	public Set<Categoria> categorias = new HashSet<>();
 
 	public Integer getId() {
