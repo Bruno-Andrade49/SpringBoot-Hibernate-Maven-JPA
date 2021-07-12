@@ -12,9 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 @Repository
 @Entity
