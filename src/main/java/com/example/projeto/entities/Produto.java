@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Repository
@@ -35,6 +37,9 @@ public class Produto implements Serializable {
 
 	@ManyToMany(mappedBy = "produtos")
 	public Set<Categoria> categorias = new HashSet<>();
+
+	@OneToMany(mappedBy = "id.produto")
+	public Set<OrderItem> itens = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -86,6 +91,15 @@ public class Produto implements Serializable {
 
 	public Set<Categoria> getCategorias() {
 		return categorias;
+	}
+
+	@JsonIgnore
+	public Set<Ordenacao> orderItens() {
+		Set<Ordenacao> lista = new HashSet<>();
+		for (OrderItem iten : itens) {
+			lista.add(iten.getOrdenacao());
+		}
+		return lista;
 	}
 
 	@Override
