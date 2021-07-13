@@ -2,6 +2,8 @@ package com.example.projeto.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +51,9 @@ public class Ordenacao implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "Client_ID")
 	private Usuario userClient;
+	
+	@OneToMany(mappedBy = "id.ordenacao")
+	private Set<OrderItem> itens = new HashSet<>();
 
 	public Ordenacao() {
 
@@ -75,6 +81,10 @@ public class Ordenacao implements Serializable {
 
 	public void setClient(Usuario client) {
 		this.userClient = client;
+	}
+	
+	public Set<OrderItem> getitens() {
+		return itens;
 	}
 
 	@Override
