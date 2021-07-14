@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity @Repository
 public class Payment implements Serializable {
 
@@ -27,6 +29,7 @@ public class Payment implements Serializable {
 	@MapsId
 	private Ordenacao ordenacaoPag;
 	
+	@JsonIgnore
 	public Payment() {
 	}
 

@@ -37,13 +37,6 @@ public class Ordenacao implements Serializable {
 	@OneToOne(mappedBy = "ordenacaoPag", cascade = CascadeType.ALL)
 	private Payment payment;
 	
-	public Integer getOrderStatus() {
-		return OrderStatus;
-	}
-
-	public void setOrderStatus(Integer orderStatus) {
-		OrderStatus = orderStatus;
-	}
 
 	public Ordenacao(Integer id, Instant moment, Integer orderStatus, Usuario userClient) {
 		this.id = id;
@@ -52,6 +45,14 @@ public class Ordenacao implements Serializable {
 		this.userClient = userClient;
 	}
 
+	public Integer getOrderStatus() {
+		return OrderStatus;
+	}
+	
+	public void setOrderStatus(Integer orderStatus) {
+		OrderStatus = orderStatus;
+	}
+	
 	@ManyToOne
 	@JoinColumn(name = "Client_ID")
 	private Usuario userClient;
@@ -138,6 +139,15 @@ public class Ordenacao implements Serializable {
 	public String toString() {
 		return "Order [id=" + id + ", moment=" + moment + ", client=" + userClient
 				+ "]";
+	}
+	
+	public Double getPedido() {
+		double soma = 0.0;
+		for (OrderItem item : itens) {
+			soma += item.getSubTotalItem();
+		}
+		return soma;
+				
 	}
 
 }
